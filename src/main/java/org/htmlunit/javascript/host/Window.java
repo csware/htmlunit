@@ -25,6 +25,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -463,7 +464,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             if (page != null && page.isHtmlPage()) {
                 return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
             }
-            return new URL(urlString);
+            return URI.create(urlString).toURL();
         }
         catch (final MalformedURLException e) {
             if (LOG.isWarnEnabled()) {
@@ -1995,7 +1996,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
             else {
                 try {
-                    targetURL = new URL(targetOrigin);
+                    targetURL = URI.create(targetOrigin).toURL();
                 }
                 catch (final Exception e) {
                     throw JavaScriptEngine.throwAsScriptRuntimeEx(

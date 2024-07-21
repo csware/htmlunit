@@ -2326,20 +2326,20 @@ public class HtmlPage extends SgmlPage {
                 final URL url = getUrl();
                 try {
                     if (href.startsWith("http://") || href.startsWith("https://")) {
-                        baseUrl = new URL(href);
+                        baseUrl = java.net.URI.create(href).toURL();
                     }
                     else if (href.startsWith("//")) {
-                        baseUrl = new URL(String.format("%s:%s", url.getProtocol(), href));
+                        baseUrl = java.net.URI.create(String.format("%s:%s", url.getProtocol(), href)).toURL();
                     }
                     else if (href.length() > 0 && href.charAt(0) == '/') {
                         final int port = Window.getPort(url);
-                        baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
+                        baseUrl = java.net.URI.create(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href)).toURL();
                     }
                     else if (url.toString().endsWith("/")) {
-                        baseUrl = new URL(String.format("%s%s", url, href));
+                        baseUrl = java.net.URI.create(String.format("%s%s", url, href)).toURL();
                     }
                     else {
-                        baseUrl = new URL(UrlUtils.resolveUrl(url, href));
+                        baseUrl = java.net.URI.create(UrlUtils.resolveUrl(url, href)).toURL();
                     }
                 }
                 catch (final MalformedURLException e) {

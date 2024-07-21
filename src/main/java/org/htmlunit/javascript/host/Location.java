@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -223,7 +224,7 @@ public class Location extends HtmlUnitScriptable {
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
         // update request url with location.href in case hash was changed
-        request.setUrl(new URL(getHref()));
+        request.setUrl(URI.create(getHref()).toURL());
         if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererlHeader(htmlPage.getUrl());
         }

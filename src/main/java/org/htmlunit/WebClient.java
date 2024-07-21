@@ -1556,7 +1556,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (webRequest.getProxyHost() == null) {
             final ProxyConfig proxyConfig = getOptions().getProxyConfig();
             if (proxyConfig.getProxyAutoConfigUrl() != null) {
-                if (!UrlUtils.sameFile(new URL(proxyConfig.getProxyAutoConfigUrl()), url)) {
+                if (!UrlUtils.sameFile(java.net.URI.create(proxyConfig.getProxyAutoConfigUrl()).toURL(), url)) {
                     String content = proxyConfig.getProxyAutoConfigContent();
                     if (content == null) {
                         content = getPage(proxyConfig.getProxyAutoConfigUrl())
@@ -2860,7 +2860,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebWindow webWindow = getCurrentWindow();
 
         final StringWebResponse webResponse =
-                new StringWebResponse(htmlCode, new URL("https://www.htmlunit.org/dummy.html"));
+                new StringWebResponse(htmlCode, java.net.URI.create("https://www.htmlunit.org/dummy.html").toURL());
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
@@ -2881,7 +2881,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebWindow webWindow = getCurrentWindow();
 
         final StringWebResponse webResponse =
-                new StringWebResponse(xhtmlCode, new URL("https://www.htmlunit.org/dummy.html"));
+                new StringWebResponse(xhtmlCode, java.net.URI.create("https://www.htmlunit.org/dummy.html").toURL());
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 

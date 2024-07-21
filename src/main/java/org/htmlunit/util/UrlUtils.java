@@ -235,7 +235,7 @@ public final class UrlUtils {
         final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":").toLowerCase(Locale.ROOT);
 
         if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
-            final URL response = new URL(url);
+            final URL response = java.net.URI.create(url).toURL();
             if (response.getProtocol().startsWith("http")
                     && org.apache.commons.lang3.StringUtils.isEmpty(response.getHost())) {
                 throw new MalformedURLException("Missing host name in url: " + url);
@@ -610,7 +610,7 @@ public final class UrlUtils {
             s.append(ref);
         }
 
-        return new URL(s.toString());
+        return java.net.URI.create(s.toString()).toURL();
     }
 
     /**

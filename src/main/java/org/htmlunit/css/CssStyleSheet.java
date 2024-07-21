@@ -298,7 +298,7 @@ public class CssStyleSheet implements Serializable {
             if (link == null) {
                 // Use href.
                 final BrowserVersion browser = client.getBrowserVersion();
-                request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
+                request = new WebRequest(java.net.URI.create(url).toURL(), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
                 request.setRefererlHeader(page.getUrl());
                 // https://www.w3.org/TR/css-syntax-3/#input-byte-stream
                 request.setDefaultResponseContentCharset(UTF_8);

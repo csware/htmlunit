@@ -53,7 +53,7 @@ class WebSocketCookieStore implements CookieStore {
         final List<HttpCookie> cookies = new ArrayList<>();
         try {
             final String urlString = uri.toString().replace("ws://", "http://").replace("wss://", "https://");
-            final java.net.URL url = new java.net.URL(urlString);
+            final java.net.URL url = java.net.URI.create(urlString).toURL();
             for (final Cookie cookie : webClient_.getCookies(url)) {
                 final HttpCookie httpCookie = new HttpCookie(cookie.getName(), cookie.getValue());
                 httpCookie.setVersion(0);
