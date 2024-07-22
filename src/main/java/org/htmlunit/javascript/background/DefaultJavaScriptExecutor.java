@@ -75,7 +75,6 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         return "JS executor for " + webClient_.get();
     }
 
-    @SuppressWarnings("deprecation")
     private void killThread() {
         if (eventLoopThread_ == null) {
             return;
@@ -98,11 +97,10 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
                         + eventLoopThread_.getName()
                         + " still alive at "
                         + System.currentTimeMillis());
-                LOG.warn("Event loop thread will be stopped");
             }
 
-            // Stop the thread
-            eventLoopThread_.stop();
+            LOG.error("Event loop thread did not stop within reasonable time.");
+            throw new UnsupportedOperationException();
         }
     }
 

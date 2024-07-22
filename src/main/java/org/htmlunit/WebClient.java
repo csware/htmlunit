@@ -2332,14 +2332,9 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         currentWindow_ = null;
 
-        ThreadDeath toThrow = null;
         if (scriptEngine_ != null) {
             try {
                 scriptEngine_.shutdown();
-            }
-            catch (final ThreadDeath ex) {
-                // make sure the following cleanup is performed to avoid resource leaks
-                toThrow = ex;
             }
             catch (final Exception e) {
                 LOG.error("Exception while shutdown the scriptEngine", e);
@@ -2370,9 +2365,6 @@ public class WebClient implements Serializable, AutoCloseable {
         executor_ = null;
 
         cache_.clear();
-        if (toThrow != null) {
-            throw toThrow;
-        }
     }
 
     /**
