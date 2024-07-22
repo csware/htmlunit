@@ -32,13 +32,12 @@ import org.htmlunit.html.HtmlHtml;
 public final class CssPixelValueConverter {
 
     private static final Pattern TO_FLOAT_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
+	private static final Pattern TO_FLOAT2_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
 
     /**
      * Disallow instantiation of this class.
      */
-    private CssPixelValueConverter() {
-        // Empty.
-    }
+    private CssPixelValueConverter( ) {}
 
     /**
      * Converts the specified length CSS attribute value into an integer number of pixels. If the
