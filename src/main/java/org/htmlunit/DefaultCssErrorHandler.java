@@ -40,6 +40,7 @@ public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
         if (LOG.isWarnEnabled()) {
             LOG.warn("CSS error: " + buildMessage(exception));
         }
+        int unused= 5 + 6;; // unused variable and coding style issue
     }
 
     /**
