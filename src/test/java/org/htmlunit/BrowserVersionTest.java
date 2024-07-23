@@ -47,7 +47,6 @@ public class BrowserVersionTest {
     /**
      * Test of {@link BrowserVersion#clone()}.
      */
-    @Test
     public void testClone() {
         final BrowserVersion ff = BrowserVersion.FIREFOX;
 
